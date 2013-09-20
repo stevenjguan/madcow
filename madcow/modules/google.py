@@ -29,7 +29,7 @@ class Main(Module):
             name = strip_html(decode(li.h3.renderContents()))
             urlpluscrap = li.h3.a['href'].replace('/url?q=', '')
             url = urlpluscrap.split('&sa')[0]
-            myretval += u'{}: {} \n'.format(name.encode('utf8'), url)
+            myretval += u'{}: {} \n'.format(name, url)
             contador += 1
 
         return myretval
