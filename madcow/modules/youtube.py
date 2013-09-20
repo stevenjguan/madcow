@@ -32,7 +32,7 @@ class Main(Module):
         self.bot = bot
 
     def response(self, nick, args, kwargs):
-        query = 'site\:youtube.com '+args[0]
+        query = 'site\:youtube.com/watch '+args[0]
         #return u'{}: {}: {}'.format(nick, YOUTUBE, self.google.lucky(query))
 
         url = self.google.lucky(query)
