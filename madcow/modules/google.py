@@ -20,7 +20,8 @@ class Main(Module):
     def response(self, nick, args, kwargs):
         query = args[0]
         sopa = getsoup(self.google.find(query))
-        contador = 1
+        contador = 1  # Yay for the mexican dev
+        myretval = u''
         for li in sopa.body('div', {'id': 'ires'})[0].ol('li'):
             if contador > 3:
                 break
@@ -28,5 +29,7 @@ class Main(Module):
             name = strip_html(decode(li.h3.renderContents()))
             urlpluscrap = li.h3.a['href'].replace('/url?q=', '')
             url = urlpluscrap.split('&sa')[0]
-            print('{}: {}'.format(name.encode('utf8'), url))
+            myretval += u'{}: {} \n'.format(name.encode('utf8'), url)
             contador += 1
+
+        return myretval
