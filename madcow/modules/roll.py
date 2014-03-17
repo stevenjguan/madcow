@@ -50,16 +50,22 @@ class Main(Module):
     def response(self, nick, args, kwargs):
         num_dice = self.normalize(args[0])
         sides = self.normalize(args[1])
-
+		
         if sides == 0 or num_dice == 0:
             return u'GOOD JOB, UNIVERSE %s' % self.colorize(u'EXPLODES', u'red')
 
         if sides == 1 and num_dice == 1:
             return u'CHEATING DETECTED, YOU %s' % self.colorize(u'DIE', u'red')
-
+			
+		modifier = 0
+		
+		if len(args) == 4:
+			if args[3] == '+':
+				modifier = (int)args[4]
+		
         min = num_dice
         max = num_dice * sides
-        saving_throw = self.roll(min, max)
+        saving_throw = self.roll(min, max) + modifier
         save_versus = self.roll(min, max)
 
         try:
