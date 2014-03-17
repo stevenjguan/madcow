@@ -59,9 +59,9 @@ class Main(Module):
 			
 		modifier = 0
 		
-		if len(args) == 4:
-			if args[3] == '+':
-				modifier = (int)args[4]
+		if len(args) == 5:
+			if (string)args[3] == '+':
+				modifier = int(args[4])
 		
         min = num_dice
         max = num_dice * sides
