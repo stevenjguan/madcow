@@ -945,7 +945,7 @@ class SoupStrainer:
         return found
 
     def search(self, markup):
-        #print 'looking for %s in %s' % (self, markup)
+        print 'looking for %s in %s' % (self, markup)
         found = None
         # If given a list of items, scan it for a text element that
         # matches.
