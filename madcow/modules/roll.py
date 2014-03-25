@@ -57,12 +57,13 @@ class Main(Module):
         if sides == 1 and num_dice == 1:
             return u'CHEATING DETECTED, YOU %s' % self.colorize(u'DIE', u'red')
 			
-		modifier = 0
-		
-		if len(args) == 4:
-			if (string)args[2] == '+':
-				modifier = int(args[3])
-		
+	modifier = 0
+
+        msg = str(kwargs['message'])
+        temp = msg.split()
+	if len(temp) == 4:
+	    if str(temp[2]) == '+':
+                modifier = int(temp[3])
         min = num_dice
         max = num_dice * sides
         saving_throw = self.roll(min, max) + modifier

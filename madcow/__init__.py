@@ -289,7 +289,9 @@ class Madcow(object):
             return
         if req.addressed:
             lmessage = req.message.lower().strip()
+            print lmessage
             help_result = help_re.search(lmessage)
+            print help_result
             if help_result is not None:
                 if settings.PRIVATE_HELP:
                     req.make_private()
@@ -315,15 +317,32 @@ class Madcow(object):
                 return
         if settings.PROTOCOL == u'cli' and req.message == u'reload':
             self.reload_modules()
+            
+        temp = req.message.split()
+        
         for mod_name, mod in self.modules.by_priority():
             obj = mod['obj']
             self.log.debug('trying: %s', mod_name)
+                
             if obj.require_addressing and not req.addressed:
                 continue
-            try:
-                args = obj.pattern.search(req.message).groups()
-            except AttributeError:
-                continue
+            if str(mod_name) == temp[0] and len(temp) == 4:
+                if str(temp[2]) == '+':
+                    try:
+                        val = int(temp[3])
+                    except ValueError:
+                        continue
+                    msg = temp[0] + " " + temp[1]
+                    try:
+                        args = obj.pattern.search(msg).groups()
+                    except AttributeError:
+                        continue
+                    
+            else:
+                try:
+                    args = obj.pattern.search(req.message).groups()
+                except AttributeError:
+                    continue
 
             req.matched = True # module can set this to false to avoid term
 
