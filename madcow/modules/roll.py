@@ -58,7 +58,6 @@ class Main(Module):
             return u'CHEATING DETECTED, YOU %s' % self.colorize(u'DIE', u'red')
 			
 	modifier = 0
-
         msg = str(kwargs['message'])
         temp = msg.split()
 	if len(temp) == 4:

@@ -319,7 +319,6 @@ class Madcow(object):
             self.reload_modules()
             
         temp = req.message.split()
-        
         for mod_name, mod in self.modules.by_priority():
             obj = mod['obj']
             self.log.debug('trying: %s', mod_name)
